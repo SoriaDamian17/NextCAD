@@ -1,26 +1,35 @@
 @import "tailwindcss";
 
-:root {
-  --background: #ffffff;
-  --foreground: #171717;
-}
-
+/* Tokens de diseño (docs/plan-design-ux.md §11). */
 @theme inline {
-  --color-background: var(--background);
-  --color-foreground: var(--foreground);
-  --font-sans: var(--font-geist-sans);
-  --font-mono: var(--font-geist-mono);
+  /* Chrome */
+  --color-muro: #26241f;
+  --color-pizarra: #3a372f;
+  --color-plomo: #9b958a;
+  --color-texto: #ede7dc;
+  --color-borde: rgba(237, 231, 220, 0.1);
+
+  /* Viewport */
+  --color-papel: #efebe3;
+  --color-grid-menor: rgba(58, 55, 47, 0.08);
+  --color-grid-mayor: rgba(58, 55, 47, 0.16);
+
+  /* Acentos: roble = activo/hover, teja = selección */
+  --color-roble: #c89b5e;
+  --color-teja: #b2553a;
+
+  /* Tipografía */
+  --font-sans: var(--font-schibsted);
+  --font-mono: var(--font-plex-mono);
 }
 
-@media (prefers-color-scheme: dark) {
-  :root {
-    --background: #0a0a0a;
-    --foreground: #ededed;
-  }
+html,
+body {
+  height: 100%;
 }
 
 body {
-  background: var(--background);
-  color: var(--foreground);
-  font-family: Arial, Helvetica, sans-serif;
+  background: #26241f;
+  color: #ede7dc;
+  font-family: var(--font-schibsted), system-ui, sans-serif;
 }

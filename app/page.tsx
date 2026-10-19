@@ -1,9 +1,9 @@
-import { TestCanvas } from "@/components/dev/TestCanvas";
+import { Viewport2D } from "@/components/viewport/Viewport2D";
 
 export default function Home() {
   return (
     <main className="h-[100dvh] w-full">
-      <TestCanvas />
+      <Viewport2D />
     </main>
   );
 }
