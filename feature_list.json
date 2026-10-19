@@ -1,0 +1,157 @@
+{
+  "project": "nextcad",
+  "description": "Editor web tipo AutoCAD para dibujar planos 2D en el navegador (Next.js + react-three-fiber + drei), con visión de escalar a elementos 3D sobre el plano en versiones futuras. MVP: solo 2D.",
+  "rules": {
+    "one_feature_at_a_time": true,
+    "require_tests_to_close": true,
+    "valid_status": ["pending", "in_progress", "done", "blocked"]
+  },
+  "features": [
+    {
+      "id": 1,
+      "name": "ui_reference_analysis",
+      "title": "Análisis de la imagen de referencia de UI",
+      "description": "Analizar .claude\\plano-2d-resources-3d.PNG para definir el layout de la interfaz: distribución de la toolbar, canvas central, paneles laterales, paleta de colores y estilo visual.",
+      "acceptance": [
+        "Se documenta la distribución de zonas de la UI (toolbar, viewport, paneles) basada en la imagen",
+        "Se define paleta de colores y estilo visual (tema oscuro/claro, tipografía)",
+        "El resultado orienta el layout de los features de UI siguientes (toolbar_draw_tools, properties_panel)"
+      ],
+      "status": "done"
+    },
+    {
+      "id": 2,
+      "name": "project_setup",
+      "title": "Scaffold del proyecto",
+      "description": "Inicializar Next.js (App Router, TypeScript) con react-three-fiber, drei, zustand, Tailwind y Vitest para tests.",
+      "acceptance": [
+        "`pnpm dev` arranca sin errores y la ruta raíz renderiza",
+        "react-three-fiber y drei instalados y verificados con un Canvas de prueba",
+        "Vitest configurado y `pnpm test` pasa con un test de ejemplo",
+        "`pnpm build` completa sin errores"
+      ],
+      "status": "pending"
+    },
+    {
+      "id": 3,
+      "name": "viewport_2d",
+      "title": "Viewport 2D con grid y navegación",
+      "description": "Canvas con cámara ortográfica estilo CAD: grid de fondo (drei Grid), zoom centrado en cursor, pan y reset de vista.",
+      "acceptance": [
+        "Cámara ortográfica renderizando el plano XY",
+        "Grid de fondo tipo CAD con líneas mayores/menores (drei <Grid>)",
+        "Zoom centrado en la posición del cursor (rueda del mouse)",
+        "Pan con middle-click o space+drag",
+        "Atajo para resetear la vista"
+      ],
+      "status": "pending"
+    },
+    {
+      "id": 4,
+      "name": "scene_store",
+      "title": "Store central de la escena",
+      "description": "Store con zustand que modela las formas básicas (rect, circle, line, text) como geometría en el plano XY, con id, posición, dimensiones y estilo.",
+      "acceptance": [
+        "Tipos TypeScript para cada forma con id único y timestamps",
+        "Store expone acciones: add, update, remove, select sobre las formas",
+        "Persistencia del store preparada para undo/redo (historial de estados)"
+      ],
+      "status": "pending"
+    },
+    {
+      "id": 5,
+      "name": "toolbar_draw_tools",
+      "title": "Toolbar de herramientas de dibujo",
+      "description": "Barra de herramientas con: Select, Rectángulo, Círculo, Línea y Texto. La herramienta activa resalta visualmente.",
+      "acceptance": [
+        "Toolbar visible con las 5 herramientas (iconos o texto)",
+        "La herramienta activa queda resaltada y es la que recibe los eventos del canvas",
+        "Atajos de teclado para cambiar de herramienta (V, R, C, L, T)",
+        "La herramienta Select es la default al cargar"
+      ],
+      "status": "pending"
+    },
+    {
+      "id": 6,
+      "name": "shape_drawing",
+      "title": "Dibujado de formas con click-drag",
+      "description": "Con una herramienta de dibujo activa, crear formas en el canvas con click-drag, mostrando preview en tiempo real hasta soltar el mouse.",
+      "acceptance": [
+        "Click-drag crea rectángulos, círculos y líneas sobre el plano XY",
+        "Preview en vivo de la forma mientras se arrastra",
+        "El click sin arrastrar cancela la operación",
+        "Las formas creadas aparecen en el store y persisten entre renders",
+        "Textos se insertan con click y editable inline"
+      ],
+      "status": "pending"
+    },
+    {
+      "id": 7,
+      "name": "selection_transform",
+      "title": "Selección, mover y redimensionar",
+      "description": "Herramienta Select: click para seleccionar, arrastrar para mover, handles en las esquinas para redimensionar.",
+      "acceptance": [
+        "Click sobre una forma la selecciona y muestra contorno/handles",
+        "Click en vacío deselecciona",
+        "Arrastrar una forma seleccionada la mueve (snapping opcional a grid)",
+        "Handles de esquina/edge redimensionan la forma",
+        "La selección se refleja en el store"
+      ],
+      "status": "pending"
+    },
+    {
+      "id": 8,
+      "name": "properties_panel",
+      "title": "Panel de propiedades",
+      "description": "Panel lateral que muestra y permite editar valores numéricos de la forma seleccionada: posición X/Y, ancho/alto o radio, color de trazo y relleno.",
+      "acceptance": [
+        "El panel muestra los valores de la forma seleccionada en tiempo real",
+        "Editar un valor numérico actualiza la forma en el canvas",
+        "Panel vacío/deshabilitado cuando no hay selección",
+        "Los cambios desde el canvas se reflejan en el panel"
+      ],
+      "status": "pending"
+    },
+    {
+      "id": 9,
+      "name": "edit_operations",
+      "title": "Eliminar, duplicar y undo/redo",
+      "description": "Operaciones de edición sobre formas seleccionadas: Delete para eliminar, Ctrl+D para duplicar, Ctrl+Z / Ctrl+Shift+Z para deshacer/rehacer.",
+      "acceptance": [
+        "Delete elimina la(s) forma(s) seleccionada(s)",
+        "Ctrl+D duplica la forma seleccionada con offset visible",
+        "Ctrl+Z deshace y Ctrl+Shift+Z rehace (historial de acciones del store)",
+        "Los atajos no disparan mientras se está escribiendo en un input"
+      ],
+      "status": "pending"
+    },
+    {
+      "id": 10,
+      "name": "object_library",
+      "title": "Biblioteca de objetos predefinidos (cama, silla, mesa...)",
+      "description": "Catálogo de objetos compuestos (ej. una cama = rectángulo + cabecera) que se insertan en el canvas como un grupo seleccionable, con escala y rotación.",
+      "acceptance": [
+        "Panel/botón para abrir la biblioteca de objetos",
+        "Insertar un objeto (cama incluida) en el centro del viewport o donde se haga click",
+        "El objeto se comporta como una forma compuesta: seleccionable, movible, redimensionable",
+        "Al menos 3 objetos de ejemplo: cama, silla, mesa",
+        "Los objetos viven en el mismo store que las formas básicas"
+      ],
+      "status": "pending"
+    },
+    {
+      "id": 11,
+      "name": "project_persistence",
+      "title": "Guardar, cargar y exportar",
+      "description": "Persistencia del plano: guardar/cargar el estado del proyecto en localStorage (y descargar/cargar como archivo JSON), más export de imagen PNG del viewport.",
+      "acceptance": [
+        "Botón guardar serializa la escena a localStorage",
+        "Al recargar la página se restaura el último plano guardado",
+        "Descargar proyecto como .json y cargarlo desde archivo",
+        "Exportar el viewport como imagen PNG",
+        "Cargar un proyecto corrupto muestra un error y no rompe la app"
+      ],
+      "status": "pending"
+    }
+  ]
+}
