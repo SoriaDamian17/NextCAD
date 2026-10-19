@@ -30,7 +30,7 @@
         "Vitest configurado y `pnpm test` pasa con un test de ejemplo",
         "`pnpm build` completa sin errores"
       ],
-      "status": "pending"
+      "status": "done"
     },
     {
       "id": 3,
