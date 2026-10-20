@@ -50,3 +50,34 @@ de formas queda para la feature 6. `feature_list.json` → `scene_store: done`.
 **Siguiente:** feature 5 `toolbar_draw_tools`.
 
 ---
+
+## Feature 5 — `toolbar_draw_tools` (2026-10-20)
+
+**Estado:** `done`. **Plan:** `docs/plan-toolbar_draw_tools.md`. **Seguimiento:** `progress/feature-toolbar_draw_tools.md`.
+
+**Qué se hizo:** rail de herramientas vertical de 48px a la izquierda del viewport con Select,
+Rectángulo, Círculo, Línea y Texto. Modelo puro `lib/tools.ts` (tabla `TOOL_DEFS`, resolución de
+atajos, guardas de modificadores / foco editable / repetición) y store zustand `lib/tool-store.ts`
+(`activeTool`, default `select`, no serializable). Iconos SVG inline propios de 1.5px,
+tick `roble` en la herramienta activa y `aria-pressed` en cada botón. Atajos V/R/C/L/T sobre
+`window`. `app/page.tsx` pasa a layout `flex` (rail + viewport) y el cursor del canvas sigue la
+herramienta activa (`crosshair` al dibujar, `default` en Select).
+
+**Tasks completadas:** F5.1 modelo puro · F5.2 store · F5.3 iconos · F5.4 botón y rail ·
+F5.5 atajos · F5.6 integración con viewport y layout · F5.7 verificación y cierre.
+
+**Verificación:** `pnpm build`, `pnpm exec tsc --noEmit` y `pnpm lint` sin errores;
+`pnpm test` → 9 archivos / 72 tests en verde (30 nuevos: 18 de `tools`, 5 de `tool-store`,
+7 de `ToolRail`). `pnpm dev` + `GET /` → 200 con el rail y los 5 botones en el HTML servido.
+Prueba negativa ejecutada y revertida.
+
+**Notas:** el cursor se aplica como clase Tailwind en el contenedor del viewport y lo hereda el
+canvas, en lugar de mutar `gl.domElement.style.cursor`: el lint de React Compiler
+(`react-hooks/immutability`) rechaza mutar valores devueltos por un hook. Con esa herencia, el
+`cursor = ""` de `CameraRig` al soltar `Space` vuelve a ser el comportamiento correcto.
+La revisión visual en navegador (hover, foco visible, WebGL) queda manual, igual que en la
+feature 3. `feature_list.json` → `toolbar_draw_tools: done`.
+
+**Siguiente:** feature 6 `shape_drawing`.
+
+---
