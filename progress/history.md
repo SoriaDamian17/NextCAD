@@ -26,3 +26,27 @@ F3.7 eliminar `components/dev/` · F3.8 tests · F3.9 verificación y cierre.
 **Siguiente:** feature 4 `scene_store`.
 
 ---
+
+## Feature 4 — `scene_store` (2026-10-20)
+
+**Estado:** `done`. **Plan:** `docs/plan-scene-store.md`. **Seguimiento:** `progress/feature-scene_store.md`.
+
+**Qué se hizo:** modelo discriminado de formas (`rect`, `circle`, `line`, `text`) con id, timestamps
+y estilo en `lib/scene.ts`; store zustand en `lib/scene-store.ts` con `shapes` + `order`,
+selección múltiple (`selectedIds`), acciones `add`/`update`/`remove`/`select`/`clearSelection`,
+historial `past`/`future` con `undo`/`redo` (límite 50) y transacciones para agrupar el drag.
+Estado JSON-plano preparado para la persistencia de la feature 11.
+
+**Tasks completadas:** F4.1 modelo/fábrica · F4.2 store base · F4.3 historial/transacciones ·
+F4.4 casos límite/selectores · F4.5 verificación · F4.6 cierre documental.
+
+**Verificación:** `pnpm build`, `pnpm exec tsc --noEmit` y `pnpm lint` sin errores;
+`pnpm test` → 6 archivos / 42 tests en verde (33 nuevos: 7 de `scene` + 26 de `scene-store`).
+Prueba negativa ejecutada y revertida.
+
+**Notas:** feature headless, sin cambios en `app/` ni `components/`. La verificación visual
+de formas queda para la feature 6. `feature_list.json` → `scene_store: done`.
+
+**Siguiente:** feature 5 `toolbar_draw_tools`.
+
+---
