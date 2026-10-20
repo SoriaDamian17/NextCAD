@@ -56,7 +56,7 @@
         "Store expone acciones: add, update, remove, select sobre las formas",
         "Persistencia del store preparada para undo/redo (historial de estados)"
       ],
-      "status": "pending"
+      "status": "done"
     },
     {
       "id": 5,
