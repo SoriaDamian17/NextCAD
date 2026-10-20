@@ -13,10 +13,8 @@ _Describe en 3-5 bullets qué vas a hacer antes de tocar código._
 
 ## Bitácora
 
-_Anota aquí cada paso significativo: archivos creados, decisiones, bloqueos._
-
-- ...
+- Feature 4 `scene_store` cerrada (ver `history.md`).
 
 ## Próximo paso
 
-_Feature 3 `viewport_2d` cerrada (ver `history.md`). Lo siguiente: feature 4 `scene_store`._
+_Feature 4 `scene_store` cerrada (ver `history.md`). Lo siguiente: feature 5 `toolbar_draw_tools`._
