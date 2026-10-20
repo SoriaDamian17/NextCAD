@@ -55,6 +55,8 @@ export function CameraRig() {
       if (e.code === "Space" && panning) {
         panning = false;
         controls.mouseButtons.left = ACTION.NONE;
+        // Revierte el cursor inline para que el canvas vuelva a heredar el
+        // cursor de la herramienta activa (docs/plan-toolbar_draw_tools.md §4.6).
         gl.domElement.style.cursor = "";
       }
     };

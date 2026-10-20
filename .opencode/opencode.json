@@ -1,0 +1,24 @@
+
+{
+  "$schema": "https://opencode.ai/config.json",
+  "model": "anthropic/claude-3-5-sonnet",
+  "small_model": "anthropic/claude-3-5-haiku",
+  "agent": {
+    "plan": {
+      "model": "opencode/minimax-m3.1-flash-free",
+      "tools": {
+        "bash": false,
+        "edit": false,
+        "write": false
+      }
+    },
+    "build": {
+      "model": "opencode/deepseek-v4.1-flash-free",
+      "tools": {
+        "bash": true,
+        "edit": true,
+        "write": true
+      }
+    }
+  }
+}
